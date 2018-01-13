@@ -21,16 +21,18 @@
 
 import json
 import requests
+import time
 
 
 def get_quiz():
-    # resp = requests.get('http://htpmsg.jiecaojingxuan.com/msg/current',timeout=4).text
-    resp = requests.get('http://wehave.love/current.json', timeout=4).text
+    resp = requests.get('http://htpmsg.jiecaojingxuan.com/msg/current',timeout=4).text
+    # resp = requests.get('http://wehave.love/current.json', timeout=4).text
 
     try:
         resp_dict = json.loads(resp)
     except:
         print('JSON decoding is error. Try it again.')
+        time.sleep(1)
         get_quiz()
     else:
         if resp_dict['msg'] != 'no data':
