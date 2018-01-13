@@ -8,7 +8,7 @@
 
 @license: (C) Copyright 2018.
 
-@contact: roy.law@qq.com
+@contact: https://github.com/RoyLaw
 
 @file: quiz_json_fetcher.py
 
@@ -41,6 +41,7 @@ def get_answer():
         options = resp_dict['data']['event']['options']
 
         list(options)
+        print(options[0])
         for x in options:
             print(x)
 

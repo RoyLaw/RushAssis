@@ -8,7 +8,7 @@
 
 @license: (C) Copyright 2018.
 
-@contact: roy.law@qq.com
+@contact: https://github.com/RoyLaw
 
 @file: rush_assistant.py
 
