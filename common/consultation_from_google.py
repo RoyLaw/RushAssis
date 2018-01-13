@@ -24,15 +24,15 @@ import webbrowser
 from googleapiclient.discovery import build
 import socks
 import socket
-
+import threading
 
 # Set SOCKS Proxy for Google Custom Search
 socks.set_default_proxy(socks.SOCKS5, "127.0.0.1", 1080)
 socket.socket = socks.socksocket
 
 # Google Custom Search
-g_cse_api_key = 'key'
-g_cse_id = 'id'
+g_cse_api_key = 'your_key'
+g_cse_id = 'your_id'
 
 
 def google_search(query, start):
@@ -51,7 +51,6 @@ def metric1Func(question, answers):
     met1 = [0, 0, 0]
     res = google_search(question, None)
     items = str(res['items']).lower()
-    print(items)
     met1[0] = items.count(answers[0].lower())
     met1[1] = items.count(answers[1].lower())
     met1[2] = items.count(answers[2].lower())
@@ -65,6 +64,10 @@ def metric2Func(question, answers):
     res0 = google_search(question + ' "' + answers[0] + '"', None)
     res1 = google_search(question + ' "' + answers[1] + '"', None)
     res2 = google_search(question + ' "' + answers[2] + '"', None)
+
+    print(int(res0['searchInformation']['totalResults']))
+    print(int(res1['searchInformation']['totalResults']))
+    print(int(res2['searchInformation']['totalResults']))
     return [int(res0['searchInformation']['totalResults']), int(res1['searchInformation']['totalResults']),
             int(res2['searchInformation']['totalResults'])]
 

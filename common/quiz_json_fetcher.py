@@ -25,8 +25,8 @@ import time
 
 
 def get_quiz():
-    # resp = requests.get('http://htpmsg.jiecaojingxuan.com/msg/current',timeout=4).text
-    resp = requests.get('http://wehave.love/current.json', timeout=4).text
+    #The original REST API had been desprecated
+    resp = requests.get('http://htpmsg.jiecaojingxuan.com/msg/current',timeout=4).text
 
     try:
         resp_dict = json.loads(resp)
@@ -35,7 +35,7 @@ def get_quiz():
         time.sleep(1)
         get_quiz()
     else:
-        if resp_dict['msg'] != 'no data':
+        if resp_dict['msg'] != 'no data ':
             resp_dict = eval(str(resp))
 
             question = resp_dict['data']['event']['desc']
