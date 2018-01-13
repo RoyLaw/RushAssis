@@ -24,31 +24,36 @@ import webbrowser
 import urllib
 
 questions = []
+questions.append('no_data')
 
 
-def get_answer():
+def get_quiz():
     # resp = requests.get('http://htpmsg.jiecaojingxuan.com/msg/current',timeout=4).text
-    resp = requests.get('http://wehave.love/current.json',timeout=4).text
-    resp_dict = json.loads(resp)
-    if resp_dict['msg'] == 'no data':
-        return 'Waiting for a question...'
+    resp = requests.get('http://wehave.love/current.json', timeout=4).text
+
+    try:
+        resp_dict = json.loads(resp)
+    except:
+        print('JSON decoding is error. Try it again.')
+        get_quiz()
     else:
-        resp_dict = eval(str(resp))
+        if resp_dict['msg'] != 'no data':
+            resp_dict = eval(str(resp))
 
-        question = resp_dict['data']['event']['desc']
-        question = question[question.find('.') + 1:question.find('?')]
+            question = resp_dict['data']['event']['desc']
+            question = question[question.find('.') + 1:question.find('?')]
 
-        options = resp_dict['data']['event']['options']
-
-        list(options)
-        print(options[0])
-        for x in options:
-            print(x)
-
-        # print(options)
-
-        if question not in questions:
-            questions.append(question)
-            webbrowser.open("https://www.google.com/search?source=hp&q=" + urllib.parse.quote(question))
+            options = resp_dict['data']['event']['options']
+            options = list(eval(options))
         else:
-            return 'Waiting for new questions...'
+            question = 'no_data'
+            options = []
+        return question, options
+
+
+def search_quiz(question, options):
+    if question not in questions:
+        questions.append(question)
+        webbrowser.open("https://www.google.com/search?source=hp&q=" + urllib.parse.quote(question+options[0]))
+    else:
+        print('Waiting for any question...')

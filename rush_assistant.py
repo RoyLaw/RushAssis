@@ -21,10 +21,12 @@
 import time
 from common import quiz_json_fetcher
 
+
 def main():
     while True:
-        print(time.strftime('%H:%M:%S',time.localtime(time.time())))
-        print(quiz_json_fetcher.get_answer())
+        print(time.strftime('%H:%M:%S', time.localtime(time.time())))
+        question, options = quiz_json_fetcher.get_quiz()
+        quiz_json_fetcher.search_quiz(question, options)
         time.sleep(1)
 
 
