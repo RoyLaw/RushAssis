@@ -18,15 +18,16 @@
 
 '''
 
+
 import time
-from common import quiz_json_fetcher
+from common import quiz_json_fetcher, answer_searcher
 
 
 def main():
     while True:
         print(time.strftime('%H:%M:%S', time.localtime(time.time())))
         question, options = quiz_json_fetcher.get_quiz()
-        quiz_json_fetcher.search_quiz(question, options)
+        answer_searcher.search_quiz(question, options)
         time.sleep(1)
 
 

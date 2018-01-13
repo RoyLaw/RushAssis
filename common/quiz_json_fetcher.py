@@ -18,13 +18,9 @@
 
 '''
 
+
 import json
 import requests
-import webbrowser
-import urllib
-
-questions = []
-questions.append('no_data')
 
 
 def get_quiz():
@@ -56,9 +52,3 @@ def get_quiz():
         return question, options
 
 
-def search_quiz(question, options):
-    if question not in questions:
-        questions.append(question)
-        webbrowser.open("https://www.google.com/search?source=hp&q=" + urllib.parse.quote(question+options[0]))
-    else:
-        print('Waiting for any question...')
