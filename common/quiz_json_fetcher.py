@@ -25,8 +25,8 @@ import time
 
 
 def get_quiz():
-    resp = requests.get('http://htpmsg.jiecaojingxuan.com/msg/current',timeout=4).text
-    # resp = requests.get('http://wehave.love/current.json', timeout=4).text
+    # resp = requests.get('http://htpmsg.jiecaojingxuan.com/msg/current',timeout=4).text
+    resp = requests.get('http://wehave.love/current.json', timeout=4).text
 
     try:
         resp_dict = json.loads(resp)
