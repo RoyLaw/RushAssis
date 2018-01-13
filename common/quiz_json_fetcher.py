@@ -45,6 +45,11 @@ def get_quiz():
 
             options = resp_dict['data']['event']['options']
             options = list(eval(options))
+            # 对问题进行处理，提高关键字适配度
+            # $question = str_replace("which of these", "what", $question);
+            # $question = str_replace(" not ", " ", $question);
+            # $question = str_replace(" never ", " ", $question);
+            # $question = str_replace("\n", " ", $question);
         else:
             question = 'no_data'
             options = []
