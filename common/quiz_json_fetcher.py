@@ -25,8 +25,18 @@ import time
 
 
 def get_quiz():
-    #The original REST API had been desprecated
-    resp = requests.get('http://htpmsg.jiecaojingxuan.com/msg/current',timeout=4).text
+    header = {
+        'X-Live-Device-Identifier': 'F3F78887-90F0-42A8-8DAA-BCDF6A440207',
+        'Accept': '*/*',
+        'X-Live-Session-Token': '1.2559442.1119965.RiY.af69b4d9a5e4c8ba0fb227565a7e2ab7',
+        'X-Live-Device-Type': 'ios',
+        'X-Live-OS-Version': 'Version 11.2.2 (Build 15C202)',
+        'Accept-Language': 'en-HK;q=1.0, zh-Hans-HK;q=0.9, ja-HK;q=0.8, zh-Hant-HK;q=0.7, es-ES;q=0.6',
+        'X-Live-App-Version': '1.0.4',
+        'User-Agent': 'LiveTrivia/1.0.4 (com.chongdingdahui.app; build:0.1.7; iOS 11.2.2) Alamofire/4.6.0',
+        'Content-Type': 'application/json',
+    }
+    resp = requests.get('http://msg.api.chongdingdahui.com/msg/current', headers=header, timeout=4).text
 
     try:
         resp_dict = json.loads(resp)
@@ -35,7 +45,7 @@ def get_quiz():
         time.sleep(1)
         get_quiz()
     else:
-        if resp_dict['msg'] != 'no data ':
+        if resp_dict['msg'].strip() != 'no data':
             resp_dict = eval(str(resp))
 
             question = resp_dict['data']['event']['desc']
