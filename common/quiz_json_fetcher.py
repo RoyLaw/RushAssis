@@ -26,9 +26,9 @@ import time
 
 def get_quiz():
     header = {
-        'X-Live-Device-Identifier': 'F3F78887-90F0-42A8-8DAA-BCDF6A440207',
+        'X-Live-Device-Identifier': 'your id',
         'Accept': '*/*',
-        'X-Live-Session-Token': '1.2559442.1119965.RiY.af69b4d9a5e4c8ba0fb227565a7e2ab7',
+        'X-Live-Session-Token': 'your token',
         'X-Live-Device-Type': 'ios',
         'X-Live-OS-Version': 'Version 11.2.2 (Build 15C202)',
         'Accept-Language': 'en-HK;q=1.0, zh-Hans-HK;q=0.9, ja-HK;q=0.8, zh-Hant-HK;q=0.7, es-ES;q=0.6',
@@ -37,6 +37,7 @@ def get_quiz():
         'Content-Type': 'application/json',
     }
     resp = requests.get('http://msg.api.chongdingdahui.com/msg/current', headers=header, timeout=4).text
+
 
     try:
         resp_dict = json.loads(resp)
