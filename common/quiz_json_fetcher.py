@@ -18,7 +18,6 @@
 
 '''
 
-
 import json
 import requests
 import time
@@ -26,9 +25,9 @@ import time
 
 def get_quiz():
     header = {
-        'X-Live-Device-Identifier': 'your id',
+        'X-Live-Device-Identifier': 'Your Device Id',
         'Accept': '*/*',
-        'X-Live-Session-Token': 'your token',
+        'X-Live-Session-Token': 'Your Session Token',
         'X-Live-Device-Type': 'ios',
         'X-Live-OS-Version': 'Version 11.2.2 (Build 15C202)',
         'Accept-Language': 'en-HK;q=1.0, zh-Hans-HK;q=0.9, ja-HK;q=0.8, zh-Hant-HK;q=0.7, es-ES;q=0.6',
@@ -38,9 +37,8 @@ def get_quiz():
     }
     resp = requests.get('http://msg.api.chongdingdahui.com/msg/current', headers=header, timeout=4).text
 
-
     try:
-        resp_dict = json.loads(resp)
+        resp_dict = json.loads(json_format(resp))
     except:
         print('JSON decoding is error. Try it again.')
         time.sleep(1)
@@ -54,14 +52,21 @@ def get_quiz():
 
             options = resp_dict['data']['event']['options']
             options = list(eval(options))
-            # 对问题进行处理，提高关键字适配度
-            # $question = str_replace("which of these", "what", $question);
-            # $question = str_replace(" not ", " ", $question);
-            # $question = str_replace(" never ", " ", $question);
-            # $question = str_replace("\n", " ", $question);
         else:
             question = 'no_data'
             options = []
         return question, options
 
-
+# Keep JSON Data Safe from Quota Marks
+def json_format(json_resp):
+    json_temp = str(json_resp)
+    for i in range(len(json_temp) - 2):
+        if json_temp[i] == ':' and json_temp[i + 1] == '"':
+            for j in range(i + 2, len(json_resp)):
+                if json_temp[j] == '"':
+                    if json_temp[j + 1] != ',' and json_temp[j + 1] != '}' and json_temp[j - 1] != '[' \
+                            and json_temp[j + 1] != ']':
+                        json_temp = json_temp[:j - 1] + '“' + json_temp[j + 1:]
+                    elif json_temp[j + 1] == ',' or json_temp[j + 1] == '}':
+                        break
+    return json_temp
