@@ -86,19 +86,26 @@ def optimize_question(question, type='general'):
     if '不是' in question:
         print('***此题为否定题***')
     if type == 'google':
-        question = question.replace('不是', '是')
+        question = question.replace('不', '')
         question = question.replace('哪个', '_KEYWORD_')
         question = question.replace('没', '')
         question = question.replace('几', '_KEYWORD_')
         question = question.replace('谁', '_KEYWORD_')
         question = question.replace('什么', '_KEYWORD_')
         question = question.replace('哪项', '_KEYWORD_')
+        question = question.replace('哪种', '_KEYWORD_')
+        question = question.replace('哪里', '_KEYWORD_')
+        question = question.replace('哪位', '_KEYWORD_')
     else:
-        question = question.replace('不是', '是')
+        question = question.replace('不', '')
         question = question.replace('哪个', ' ')
         question = question.replace('没', '')
         question = question.replace('几', ' ')
         question = question.replace('谁', ' ')
         question = question.replace('什么', ' ')
         question = question.replace('哪项', ' ')
+        question = question.replace('哪项', ' ')
+        question = question.replace('哪种', ' ')
+        question = question.replace('哪里', ' ')
+        question = question.replace('哪位', ' ')
     return question

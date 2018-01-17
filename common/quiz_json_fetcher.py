@@ -35,6 +35,7 @@ def get_quiz():
         'User-Agent': 'LiveTrivia/1.0.4 (com.chongdingdahui.app; build:0.1.7; iOS 11.2.2) Alamofire/4.6.0',
         'Content-Type': 'application/json',
     }
+
     resp = requests.get('http://msg.api.chongdingdahui.com/msg/current', headers=header, timeout=4).text
 
     try:
@@ -42,7 +43,6 @@ def get_quiz():
     except:
         print('JSON decoding is error. Try it again.')
         time.sleep(1)
-        get_quiz()
     else:
         if resp_dict['msg'].strip() != 'no data':
             resp_dict = eval(str(resp))
@@ -56,6 +56,8 @@ def get_quiz():
             question = 'no_data'
             options = []
         return question, options
+    get_quiz()
+
 
 # Keep JSON Data Safe from Quota Marks
 def json_format(json_resp):
