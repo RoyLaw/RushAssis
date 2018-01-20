@@ -45,7 +45,7 @@ def baidu_count(keyword, answers, timeout=2):
         "User-Agent": random.choice(Agents)
     }
     params = {
-        "wd": keyword.encode("gbk")
+        "wd": keyword.encode("utf-8")
     }
     resp = requests.get("http://www.baidu.com/s", params=params, headers=headers, timeout=timeout)
     if not resp.ok:
