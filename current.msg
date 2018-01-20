@@ -1,0 +1,1 @@
+{"code":0,"msg":"成功","data":{"event":{"answerTime":10,"desc":"9.传统彩瓷“素三彩”之所以称“素”因为没有？","displayOrder":8,"liveId":137,"options":"[\"红色\",\"绿色\",\"黄色\"]","questionId":1602,"showTime":1516425217544,"status":0,"type":"showQuestion"},"type":"showQuestion"}}
